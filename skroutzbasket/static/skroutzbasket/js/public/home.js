@@ -26,7 +26,7 @@ $(document).ready(function() {
 							var img = data.img
 							var title = data.title
 							// var new_item = "<div class='item'><div class='rm' data-price='"+price+"'><i class='fa fa-minus-circle'></i></div><div>"+title+"</div><img src='"+img+"'><div>"+price+"</div></div>"
-							var new_item = "<div class='item'><div>"+title+"</div><img src='"+img+"'><div>"+price+"</div></div>"
+							var new_item = "<div class='item'><div><a href='"+item_link+"'>"+title+"</a></div><img src='"+img+"'><div>"+price+"</div></div>"
 							if (price && title && img) {
 								$("#item_list").append(new_item);
 								var old_sum = $("#sum").html();
