@@ -136,6 +136,7 @@ USE_TZ = True
 STATICFILES_DIRS = (
     path('skroutzbasket/static'),
 )
+STATIC_ROOT = path('static')
 
 STATIC_URL = '/static/'
 
