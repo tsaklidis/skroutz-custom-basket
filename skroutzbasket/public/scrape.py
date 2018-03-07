@@ -30,7 +30,8 @@ def get_items(site):
         except urllib2.HTTPError, e:
             print e.fp.read()
 
-        pythonDictionary = {'title': title, 'price': price, 'img': img}
+        pythonDictionary = {'title': title,
+                            'price': price, 'img': img, 'link': site}
         dictionaryToJson = json.dumps(pythonDictionary)
 
         return dictionaryToJson
