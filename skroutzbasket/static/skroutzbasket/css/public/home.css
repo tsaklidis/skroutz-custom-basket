@@ -1,0 +1,22 @@
+h5{margin: 0px;}
+.items_wrp{background-color: #fff; border: 1px #EEE solid; padding: 10px; min-height: 150px;}
+.wrp{background-color: #fff; padding-bottom: 10px;}
+.item{
+	border-radius: 4px;
+	display: inline-block;
+	box-shadow: 2px 2px 5px #868686;
+	padding: 5px;
+	text-align: center;
+	max-width: 250px;
+	margin: 5px;
+}
+
+.item img{width: 100px; border: none;}
+.sum_wrp{
+	background-color: #379ac8;
+	display: inline-block;
+	color: white;
+	padding: 10px;
+	border-radius: 4px;
+}
+.rm{color:#CF3B3B; cursor: pointer;}

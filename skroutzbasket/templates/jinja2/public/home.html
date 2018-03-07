@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block page_title %}Grub Items{% endblock %}
+{% block og_title %}Grub Items{% endblock og_title %}
+
+
+{% block meta_description %}Collect and share products{% endblock %}
+{% block og_meta_description %}{%endblock%}
+
+
+{% block site_css %}
+	<link href="{{ static('skroutzbasket/css/public/home.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="container">
+		<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" id='csrf'>
+		<div class="row">
+			<div class="col-lg-12 wrp">
+				<p class="text-center">Insert item to list:</p>
+				<div class="form-group">
+					<input type="text" class="form-control" id="link">
+				</div>
+			</div>
+		</div>
+		<div class="row wrp">
+			<div class="col-lg-4 col-md-4 col-sm-4 text-left">
+				<div class="sum_wrp">Sum:<span id="sum">0</span>€</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 text-center">
+				<div class="btn btn-warning disabled"><i class="fa fa-share"></i> Share List</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 text-right">
+				<div class="btn btn-success " id="add"><i class="fa fa-plus"></i> Add item</div>
+			</div>
+
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-12 items_wrp" id="item_list">
+				<h5>Your items</h5>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block site_js %}
+	<script src="{{ static('skroutzbasket/js/public/home.js') }}"></script>
+{% endblock %}
