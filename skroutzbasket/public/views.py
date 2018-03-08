@@ -1,8 +1,10 @@
 import re
 # import json
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
+
+from skroutzbasket.list.models import List
 
 from scrape import get_items
 
@@ -23,6 +25,20 @@ def home(request):
     data = {
     }
     return render(request, 'public/home.html', data)
+
+
+def list_view(request, list_name=None):
+    lst = get_object_or_404(List, name=list_name)
+
+    total_sum = 0
+    for item in lst.items.all():
+        total_sum = total_sum + item.price
+
+    data = {
+        'items_list': lst,
+        'total_sum': total_sum,
+    }
+    return render(request, 'public/list.html', data)
 
 
 @require_POST

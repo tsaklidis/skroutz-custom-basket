@@ -23,6 +23,8 @@ class Item(models.Model):
 
     link = models.TextField(validators=[URLValidator()])
 
+    image_link = models.TextField(validators=[URLValidator()])
+
     price = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
 
     def __unicode__(self):

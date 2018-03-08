@@ -11,6 +11,7 @@
 
 {% block site_css %}
 	<link href="{{ static('skroutzbasket/css/public/home.css') }}" rel="stylesheet" type="text/css">
+	{# <link href="{{ static('skroutzbasket/css/public/list.css') }}" rel="stylesheet" type="text/css"> #}
 {% endblock %}
 
 
@@ -28,7 +29,7 @@
 		</div>
 		<div class="row wrp">
 			<div class="col-lg-4 col-md-4 col-sm-4 text-left">
-				<div class="sum_wrp">Sum:<span id="sum">0</span>€</div>
+				<div class="sum_wrp">Sum:<span id="sum">{{total_sum}}</span>€</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 text-center">
 				<div class="btn btn-warning" data-toggle="modal" data-target="#share_mdl">
@@ -44,14 +45,19 @@
 		<div class="row">
 			<div class="col-lg-12 items_wrp" id="item_list">
 				<h5>Your items</h5>
+				{% for item in items_list.items.all() %}
+					<div class='item'>
+						<div>
+							<a href='{{item.link}}'>{{item.title}}</a>
+						</div>
+						<img src='{{item.image_link}}'>
+						<div>{{item.price}}€</div>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
 
-
-
-
-	<!-- The Modal -->
 	<div class="modal fade" id="share_mdl">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -63,9 +69,9 @@
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body">
-					Anyone with this link can view the curent list.
-					
+				<div class="modal-body text-center">
+					Anyone with this link can view the curent list. <br>
+					<a id="the_link" href="{{ url('public:list_view', args=[items_list.name]) }}"></a>
 				</div>
 
 				<!-- Modal footer -->
@@ -82,4 +88,12 @@
 
 {% block site_js %}
 	<script src="{{ static('skroutzbasket/js/public/home.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var url = "{{ url('public:list_view', args=[items_list.name]) }}"
+			$('#the_link').html(window.location.href)
+		
+			
+		});
+	</script>
 {% endblock %}
