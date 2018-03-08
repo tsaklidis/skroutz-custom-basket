@@ -10,5 +10,7 @@ urlpatterns = [
     url('^list/(?P<list_name>[\w.@+-]+)',
         views.list_view, name='list_view'),
 
+    url('^create/list', views.list_create, name='list_create'),
+
 
 ]

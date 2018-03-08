@@ -1,3 +1,4 @@
+var all_items = [];
 $(document).ready(function() {
 
 	$( '#add' ).click(function() {
@@ -25,6 +26,12 @@ $(document).ready(function() {
 							var price = data.price
 							var img = data.img
 							var title = data.title
+
+							var this_item = {
+								'price': price,
+								'img': img,
+								'title': title,
+							}
 							// var new_item = "<div class='item'><div class='rm' data-price='"+price+"'><i class='fa fa-minus-circle'></i></div><div>"+title+"</div><img src='"+img+"'><div>"+price+"</div></div>"
 							var new_item = "<div class='item'><div><a href='"+item_link+"'>"+title+"</a></div><img src='"+img+"'><div>"+price+"</div></div>"
 							if (price && title && img) {
@@ -32,6 +39,8 @@ $(document).ready(function() {
 								var old_sum = $("#sum").html();
 								$("#sum").html(parseFloat(price) + parseFloat(old_sum));
 							}
+
+							all_items.push(this_item);
 
 						},
 						500: function(data) {
@@ -61,6 +70,37 @@ $(document).ready(function() {
 
 
 	// });
+
+	$( '#share_btn' ).click(function() {
+		var csrf =  $('#csrf').val();
+		list_name = '';
+
+		$.ajax({
+			url: '/create/list',
+			type: "POST",
+		    data: {
+		        csrfmiddlewaretoken : csrf
+		    },
+		    statusCode: {
+				200: function(data) {
+					// $.each(data, function (id, msg) {
+
+					// });
+					console.log(data);
+					list_name = data.name;
+				},
+				
+			},
+		});
+
+		console.log(list_name);
+
+		// $.each(all_items, function (index, value) {
+		// 	// console.log(value.price);
+		// 	// save_item(item);
+
+		// });
+	});
 });
 
 function blink(selector){

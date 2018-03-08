@@ -1,5 +1,5 @@
 import re
-# import json
+import json
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
@@ -39,6 +39,14 @@ def list_view(request, list_name=None):
         'total_sum': total_sum,
     }
     return render(request, 'public/list.html', data)
+
+
+@require_POST
+def list_create(request):
+    lst = List.objects.create()
+
+    j_dict = json.dumps({'name': lst.name})
+    return HttpResponse(j_dict, content_type='application/json; charset=utf8')
 
 
 @require_POST
