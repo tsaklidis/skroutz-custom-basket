@@ -12,6 +12,7 @@ Use with your own risk.
 <h4>TODO:</h4>
 <ol>
 	<li>Better CSS for items</li>
+	<li>Calculate shipping</li>
 	<li>Anyone can edit a list. Allow edit with secret key-token only a link: /list/r4g5h6?key=secret_key can edit</li>
 	<li>API endpoints with DRF for ajax comunications</li>
 	<li>Sanitize inputs</li>
