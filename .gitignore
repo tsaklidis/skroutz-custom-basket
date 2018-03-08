@@ -5,4 +5,4 @@
 *.sqlite3
 *.sublime-project
 skroutzbasket/settings/local.py
-/skroutzbasket/settings/local.py
+skroutzbasket/settings/local.py.example
