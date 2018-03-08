@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'skroutzbasket.public',
     'skroutzbasket.list',
-    'skroutzbasket.utilities',
+    'skroutzbasket.Utilities',
 ]
 
 MIDDLEWARE = [

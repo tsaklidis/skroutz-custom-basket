@@ -1,7 +1,7 @@
 from django.core.validators import URLValidator
 from django.db import models
 
-from ..utilities.unique.functions import get_random_string
+from ..Utilities.unique.functions import get_random_string
 
 
 class List(models.Model):
