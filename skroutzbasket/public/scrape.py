@@ -1,5 +1,6 @@
 import BeautifulSoup
 import random
+import re
 import json
 import urllib2
 
@@ -38,12 +39,14 @@ def get_items(site):
         except urllib2.HTTPError, e:
             print e.fp.read()
 
+        price = re.findall("\d+\,\d+", price)
         data_dict = {
             'title': title,
-            'price': price,
+            'price': price[0].replace(',', '.'),
             'img': img,
             'link': site
         }
+        print data_dict
         j_dict = json.dumps(data_dict)
 
         return j_dict

@@ -23,12 +23,12 @@ $(document).ready(function() {
 						},
 						200: function(data) {
 
-							var price = data.price
+							var price = parseFloat(data.price)
 							var img = data.img
 							var title = data.title
 
 							var this_item = {
-								'price': parseFloat(price),
+								'price': price,
 								'img': img,
 								'title': title,
 								'link': data.link,
@@ -37,8 +37,11 @@ $(document).ready(function() {
 							var new_item = "<div class='item'><div><a href='"+item_link+"'>"+title+"</a></div><img src='"+img+"'><div>"+price+"</div></div>"
 							if (price && title && img) {
 								$("#item_list").append(new_item);
-								var old_sum = $("#sum").html();
-								$("#sum").html(parseFloat(price) + parseFloat(old_sum));
+								var old_sum = parseFloat($("#sum").html());
+								console.log(old_sum, price )
+								
+								$("#sum").html('');
+								$("#sum").html(price + old_sum);
 							}
 
 							all_items.push(this_item);
