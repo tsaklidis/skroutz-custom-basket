@@ -1,0 +1,5 @@
+SECRET_KEY = 'some_very_Secret_key'
+
+DEBUG = False
+
+ALLOWED_HOSTS = []
