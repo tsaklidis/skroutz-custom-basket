@@ -1,11 +1,19 @@
 import BeautifulSoup
-import urllib2
+import random
 import json
+import urllib2
 
 
 def get_items(site):
     if site:
-        hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+        agents = [
+            'Mozilla/5.0 (X11; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0',  # noqa
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',  # noqa
+            'Mozilla/5.0 (Linux; Android 7.0; SAMSUNG SM-A510F Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/6.4 Chrome/56.0.2924.87 Mobile Safari/537.36',  # noqa
+            'Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',  # noqa
+        ]
+        r = random.sample(agents, 1)
+        hdr = {'User-Agent': r[0],
                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
                'Accept-Encoding': 'none',
@@ -30,9 +38,13 @@ def get_items(site):
         except urllib2.HTTPError, e:
             print e.fp.read()
 
-        pythonDictionary = {'title': title,
-                            'price': price, 'img': img, 'link': site}
-        dictionaryToJson = json.dumps(pythonDictionary)
+        data_dict = {
+            'title': title,
+            'price': price,
+            'img': img,
+            'link': site
+        }
+        j_dict = json.dumps(data_dict)
 
-        return dictionaryToJson
-    return {'error': 'no link provided'}
+        return j_dict
+    return json.dumps({'error': 'no link provided'})
