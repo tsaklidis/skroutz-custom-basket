@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_POST
 
-from skroutzbasket.list.models import List
+from skroutzbasket.list.models import List, Item
 
 from scrape import get_items
 
@@ -46,6 +46,27 @@ def list_create(request):
     lst = List.objects.create()
 
     j_dict = json.dumps({'name': lst.name})
+    return HttpResponse(j_dict, content_type='application/json; charset=utf8')
+
+
+@require_POST
+def add_item(request):
+    list_name = request.POST.get('name')
+    title = request.POST.get('title')
+    price = request.POST.get('price')
+    image_link = request.POST.get('image_link')
+    link = request.POST.get('link')
+
+    lst = List.objects.get(name=list_name)
+
+    item = Item.objects.create(title=title,
+                               price=price,
+                               image_link=image_link,
+                               link=link)
+
+    lst.items.add(item)
+
+    j_dict = json.dumps({'status': 'saved'})
     return HttpResponse(j_dict, content_type='application/json; charset=utf8')
 
 

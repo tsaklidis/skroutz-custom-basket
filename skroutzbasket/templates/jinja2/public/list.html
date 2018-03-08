@@ -19,6 +19,7 @@
 
 	<div class="container">
 		<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" id='csrf'>
+		<input type="hidden" id="list_name" value="{{items_list.name}}">
 		<div class="row">
 			<div class="col-lg-12 wrp">
 				<p class="text-center">Insert item to list:</p>
@@ -32,7 +33,7 @@
 				<div class="sum_wrp">Sum:<span id="sum">{{total_sum}}</span>€</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 text-center">
-				<div class="btn btn-warning" data-toggle="modal" data-target="#share_mdl">
+				<div class="btn btn-warning" id="share_btn" data-toggle="modal" data-target="#share_mdl">
 					<i class="fa fa-share"></i> Share List
 				</div>
 			</div>
@@ -90,10 +91,7 @@
 	<script src="{{ static('skroutzbasket/js/public/home.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var url = "{{ url('public:list_view', args=[items_list.name]) }}"
 			$('#the_link').html(window.location.href)
-		
-			
 		});
 	</script>
 {% endblock %}

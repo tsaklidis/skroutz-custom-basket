@@ -28,9 +28,10 @@ $(document).ready(function() {
 							var title = data.title
 
 							var this_item = {
-								'price': price,
+								'price': parseFloat(price),
 								'img': img,
 								'title': title,
+								'link': data.link,
 							}
 							// var new_item = "<div class='item'><div class='rm' data-price='"+price+"'><i class='fa fa-minus-circle'></i></div><div>"+title+"</div><img src='"+img+"'><div>"+price+"</div></div>"
 							var new_item = "<div class='item'><div><a href='"+item_link+"'>"+title+"</a></div><img src='"+img+"'><div>"+price+"</div></div>"
@@ -73,33 +74,39 @@ $(document).ready(function() {
 
 	$( '#share_btn' ).click(function() {
 		var csrf =  $('#csrf').val();
-		list_name = '';
 
-		$.ajax({
-			url: '/create/list',
-			type: "POST",
-		    data: {
-		        csrfmiddlewaretoken : csrf
-		    },
-		    statusCode: {
-				200: function(data) {
-					// $.each(data, function (id, msg) {
+		var list_name = $('#list_name').val();
+		if (!list_name) {
+			
+			$.ajax({
+				url: '/create/list',
+				type: "POST",
+			    data: {
+			        csrfmiddlewaretoken : csrf
+			    },
+			    statusCode: {
+					200: function(data) {
+						console.log(data);
 
-					// });
-					console.log(data);
-					list_name = data.name;
+						list_name = data.name;
+						// var url = "{{ url('public:list_view', args=[items_list.name]) }}"
+						var url = window.location.href + '/list/' + list_name;
+						$('#the_link').html(url).attr('href', url);
+
+						$.each(all_items, function (index, item) {
+							save_item(list_name, item);
+						});
+					},
+					
 				},
-				
-			},
-		});
+			});
+		}
+		else{
+			$.each(all_items, function (index, item) {
+				save_item(list_name, item);
+			});
+		}
 
-		console.log(list_name);
-
-		// $.each(all_items, function (index, value) {
-		// 	// console.log(value.price);
-		// 	// save_item(item);
-
-		// });
 	});
 });
 
@@ -108,5 +115,28 @@ function blink(selector){
 	    $(this).fadeIn(1000, function(){
 
 	    });
+	});
+}
+
+function save_item(list_name, item){
+	var csrf =  $('#csrf').val();
+
+	$.ajax({
+		url: '/add/item/to/list',
+		type: "POST",
+	    data: {
+	    	name:list_name,
+	    	price: item.price,
+	    	title: item.title,
+	    	link: item.link,
+	    	image_link: item.img,
+	        csrfmiddlewaretoken : csrf
+	    },
+	    statusCode: {
+			200: function(data) {
+				console.log(data);
+			},
+			
+		},
 	});
 }

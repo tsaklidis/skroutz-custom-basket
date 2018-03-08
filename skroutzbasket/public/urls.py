@@ -12,5 +12,7 @@ urlpatterns = [
 
     url('^create/list', views.list_create, name='list_create'),
 
+    url('^add/item/to/list', views.add_item, name='add_item'),
+
 
 ]
