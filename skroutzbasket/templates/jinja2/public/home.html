@@ -32,7 +32,7 @@
 				<div class="sum_wrp">Sum:<span id="sum">0</span>€</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 text-center">
-				<div class="btn btn-warning" id="share_btn" data-toggle="modal" data-target="#share_mdl">
+				<div class="btn btn-warning" id="share_btn" >
 					<i class="fa fa-share"></i> Share List
 				</div>
 			</div>
@@ -41,7 +41,9 @@
 			</div>
 
 		</div>
-		<hr>
+		<img class="loading" src="{{ static('skroutzbasket/img/loading.gif') }}">
+		<div class="loading">Loading...</div>
+		<br>
 		<div class="row">
 			<div class="col-lg-12 items_wrp" id="item_list">
 				<h5>Your items</h5>
@@ -49,27 +51,40 @@
 		</div>
 	</div>
 
-
-
-
-	<!-- The Modal -->
+	<!-- The share Modal -->
 	<div class="modal fade" id="share_mdl">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
-				<!-- Modal Header -->
 				<div class="modal-header orange">
 					<h4 class="modal-title">Sharing the list</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-				<!-- Modal body -->
 				<div class="modal-body">
-					Anyone with this link can view the curent list. <br>
+					Anyone with this link can view and editthe curent list. <br>
 					<a id="the_link" href=""></a>
 				</div>
 
-				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- The empty share Modal -->
+	<div class="modal fade" id="empty_list">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header red ">
+					<h4 class="modal-title">Why sharing an empty list...?</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body text-center">
+					The list is empty, you have to add items in order to share.
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>

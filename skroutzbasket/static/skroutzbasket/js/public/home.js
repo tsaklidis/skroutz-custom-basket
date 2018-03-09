@@ -2,11 +2,11 @@ var all_items = [];
 $(document).ready(function() {
 
 	$( '#add' ).click(function() {
-
 		var csrf =  $('#csrf').val();
 		var item_link = $('#link').val();
 		$('#link').val('');
 		if (item_link) {
+			$('.loading').css({'display':'block'});
 			$.ajax({
 					url: '/item/add/',
 					type: "POST",
@@ -45,6 +45,7 @@ $(document).ready(function() {
 							}
 
 							all_items.push(this_item);
+							$('.loading').css({'display':'none'});
 
 						},
 						500: function(data) {
@@ -76,38 +77,43 @@ $(document).ready(function() {
 	// });
 
 	$( '#share_btn' ).click(function() {
-		var csrf =  $('#csrf').val();
+		if (all_items.length > 0) {
+			$('#share_mdl').modal('show');
+			var csrf =  $('#csrf').val();
 
-		var list_name = $('#list_name').val();
-		if (!list_name) {
-			
-			$.ajax({
-				url: '/create/list',
-				type: "POST",
-			    data: {
-			        csrfmiddlewaretoken : csrf
-			    },
-			    statusCode: {
-					200: function(data) {
-						console.log(data);
+			var list_name = $('#list_name').val();
+			if ((!list_name)) {
+				$.ajax({
+					url: '/create/list',
+					type: "POST",
+				    data: {
+				        csrfmiddlewaretoken : csrf
+				    },
+				    statusCode: {
+						200: function(data) {
+							console.log(data);
 
-						list_name = data.name;
-						// var url = "{{ url('public:list_view', args=[items_list.name]) }}"
-						var url = window.location.href + '/list/' + list_name;
-						$('#the_link').html(url).attr('href', url);
+							list_name = data.name;
+							// var url = "{{ url('public:list_view', args=[items_list.name]) }}"
+							var url = window.location.href + 'list/' + list_name;
+							$('#the_link').html(url).attr('href', url);
 
-						$.each(all_items, function (index, item) {
-							save_item(list_name, item);
-						});
+							$.each(all_items, function (index, item) {
+								save_item(list_name, item);
+							});
+						},
+						
 					},
-					
-				},
-			});
+				});
+			}
+			else{
+				$.each(all_items, function (index, item) {
+					save_item(list_name, item);
+				});
+			}
 		}
 		else{
-			$.each(all_items, function (index, item) {
-				save_item(list_name, item);
-			});
+			$('#empty_list').modal('show');
 		}
 
 	});
