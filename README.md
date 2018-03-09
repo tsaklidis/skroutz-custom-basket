@@ -16,7 +16,7 @@ Use with your own risk.
 	<li>
 		<strike>Anyone can edit a list. Allow edit with secret key-token only a link: /list/r4g5h6?key=secret_key can edit</strike>
 	</li>
-	<li>API endpoints with DRF for ajax comunications</li>
+	<li>API endpoints with DRF for ajax communications</li>
 	<li>Sanitize inputs</li>
 	<li><strike>Fix the top menu</strike></li>
 	<li><strike>Create a footer</strike></li>
