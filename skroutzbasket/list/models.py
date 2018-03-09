@@ -10,6 +10,13 @@ class List(models.Model):
 
     items = models.ManyToManyField('list.item', blank=True)
 
+    def total_sum(self):
+        total_sum = 0
+        for item in self.items.all():
+            total_sum = total_sum + item.price
+
+        return '{0}'.format(total_sum)
+
     def save(self, *args, **kwargs):
         self.name = get_random_string(10)
         super(List, self).save(*args, **kwargs)

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block page_title %}Public lists | gruber.ga{% endblock %}
+{% block og_title %}Public lists | gruber.ga{% endblock og_title %}
+
+
+{% block meta_description %}Collect and share products{% endblock %}
+{% block og_meta_description %}Collect and share products{%endblock%}
+
+
+{% block og_url %}gruber.ga{% endblock %}
+
+{% block site_css %}
+	<link href="{{ static('skroutzbasket/css/public/home.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ static('skroutzbasket/css/public/lists.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 items_wrp">
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>List Name</th>
+							<th class="text-center">Total price</th>
+							<th class="text-center">Items in list</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for lst in lists %}
+							<tr>
+								<td>
+									<a href="{{ url('public:list_view', args=[lst.name]) }}">{{lst.name}}</a>
+								</td>
+								<td class="text-center">
+									{{lst.total_sum()}} €
+								</td>
+								<td class="text-center">
+									{{lst.items.count()}}
+								</td>
+							</tr>
+						{% endfor %}
+
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block site_js %}
+{% endblock %}

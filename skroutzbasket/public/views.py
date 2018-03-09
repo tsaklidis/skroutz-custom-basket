@@ -41,6 +41,15 @@ def list_view(request, list_name=None):
     return render(request, 'public/list.html', data)
 
 
+def all_lists(request,):
+    lsts = List.objects.all()
+
+    data = {
+        'lists': lsts,
+    }
+    return render(request, 'public/all_lists.html', data)
+
+
 @require_POST
 def list_create(request):
     lst = List.objects.create()
