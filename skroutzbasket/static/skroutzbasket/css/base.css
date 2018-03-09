@@ -1,2 +1,7 @@
-body{font-family: 'Roboto Condensed', sans-serif;background-color: #f6f6f6;}
-
+body{font-family: 'Roboto Condensed', sans-serif;background-color: #f6f6f6; color:#4D4D4D !important;}
+#outer-wrapper{margin-top: 50px;}
+#footer{
+	background-color: #fff;
+	margin-top: 20px;
+	padding: 20px;
+}
