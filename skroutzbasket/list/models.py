@@ -8,6 +8,8 @@ class List(models.Model):
     name = models.CharField(unique=True, max_length=255,
                             default='', blank=True)
 
+    token = models.CharField(max_length=15, blank=True)
+
     items = models.ManyToManyField('list.item', blank=True)
 
     def total_sum(self):
@@ -19,6 +21,7 @@ class List(models.Model):
 
     def save(self, *args, **kwargs):
         self.name = get_random_string(10)
+        self.token = get_random_string(15, prefix='tk')
         super(List, self).save(*args, **kwargs)
 
     def __unicode__(self):
