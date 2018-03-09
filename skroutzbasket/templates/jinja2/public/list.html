@@ -103,6 +103,17 @@
 		$(document).ready(function() {
 			$('#the_link').html(window.location.href.replace(/&?token=([^&]$|[^&]*)/i, ""))
 			$('#the_token_link').html(window.location.href)
+
+			// Due to common home.js file, disable check only at list
+			if ($_GET["token"] == "undefined" || $_GET["token"] == undefined){
+				$_GET["token"] = '';
+			}
+
+			if ($_GET["token"].length < 17) {
+				$('#link').attr('disabled', 'true', 'placeholder',"You can't add new items.");
+			}
+
+
 		});
 	</script>
 {% endblock %}
