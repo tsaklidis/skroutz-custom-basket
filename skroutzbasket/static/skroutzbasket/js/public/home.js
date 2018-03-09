@@ -11,6 +11,10 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 
 
 $(document).ready(function() {
+	if ($_GET["token"] == "undefined" || $_GET["token"] == undefined)}{
+		$_GET["token"] = '';
+	}
+
 	if ($_GET["token"].length < 17) {
 		$('#link').attr('disabled', 'true', 'placeholder',"You can't add new items.");
 	}
