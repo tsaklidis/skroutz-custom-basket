@@ -42,7 +42,7 @@ def list_view(request, list_name=None):
 
 
 def all_lists(request,):
-    lsts = List.objects.all()
+    lsts = List.objects.filter().order_by('-id')
 
     data = {
         'lists': lsts,
@@ -53,29 +53,34 @@ def all_lists(request,):
 @require_POST
 def list_create(request):
     lst = List.objects.create()
-
-    j_dict = json.dumps({'name': lst.name})
+    data = {
+        'name': lst.name,
+        'token': lst.token,
+    }
+    j_dict = json.dumps(data)
     return HttpResponse(j_dict, content_type='application/json; charset=utf8')
 
 
 @require_POST
 def add_item(request):
     list_name = request.POST.get('name')
+    token = request.POST.get('token')
     title = request.POST.get('title')
     price = request.POST.get('price')
     image_link = request.POST.get('image_link')
     link = request.POST.get('link')
+    try:
+        lst = List.objects.get(name=list_name, token=token)
+        item = Item.objects.create(title=title,
+                                   price=price,
+                                   image_link=image_link,
+                                   link=link)
 
-    lst = List.objects.get(name=list_name)
+        lst.items.add(item)
+        j_dict = json.dumps({'status': 'saved'})
+    except List.DoesNotExist:
+        j_dict = json.dumps({'status': 'Access Denied'})
 
-    item = Item.objects.create(title=title,
-                               price=price,
-                               image_link=image_link,
-                               link=link)
-
-    lst.items.add(item)
-
-    j_dict = json.dumps({'status': 'saved'})
     return HttpResponse(j_dict, content_type='application/json; charset=utf8')
 
 

@@ -8,6 +8,7 @@ class List(models.Model):
     name = models.CharField(unique=True, max_length=255,
                             default='', blank=True)
 
+    # random string plus 2 prefix
     token = models.CharField(max_length=17, blank=True)
 
     items = models.ManyToManyField('list.item', blank=True)

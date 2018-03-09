@@ -62,8 +62,17 @@
 				</div>
 
 				<div class="modal-body">
-					Anyone with this link can view and edit the curent list. <br>
+					
+					<div class='alert alert-info'>Link for viewing list only</div>
+					<img class="share_loading" src="{{ static('skroutzbasket/img/small_loading.gif') }}">
 					<a id="the_link" href=""></a>
+					<hr>
+					<div class="alert alert-danger">
+						Link for viewing AND editing. <br>
+						Attention anyone with this link can add items to list
+					</div>
+					<img class="token_loading" src="{{ static('skroutzbasket/img/small_loading.gif') }}">
+					<a id="the_token_link" href=""></a>
 				</div>
 
 				<div class="modal-footer">

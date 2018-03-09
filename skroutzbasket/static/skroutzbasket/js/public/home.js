@@ -1,6 +1,19 @@
 var all_items = [];
-$(document).ready(function() {
 
+var $_GET = {};
+document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+    function decode(s) {
+        return decodeURIComponent(s.split("+").join(" "));
+    }
+
+    $_GET[decode(arguments[1])] = decode(arguments[2]);
+});
+
+
+$(document).ready(function() {
+	if ($_GET["token"].length < 17) {
+		$('#link').attr('disabled', 'true', 'placeholder',"You can't add new items.");
+	}
 	$( '#add' ).click(function() {
 		var csrf =  $('#csrf').val();
 		var item_link = $('#link').val();
@@ -79,7 +92,12 @@ $(document).ready(function() {
 	$( '#share_btn' ).click(function() {
 		if (all_items.length > 0) {
 			$('#share_mdl').modal('show');
+			$('#share_loading').css({'display':'block'});
+			$('#token_loading').css({'display':'block'});
+
 			var csrf =  $('#csrf').val();
+
+			var url_token = $_GET["token"];
 
 			var list_name = $('#list_name').val();
 			if ((!list_name)) {
@@ -94,12 +112,19 @@ $(document).ready(function() {
 							console.log(data);
 
 							list_name = data.name;
-							// var url = "{{ url('public:list_view', args=[items_list.name]) }}"
+							var the_token = data.token; 
 							var url = window.location.href + 'list/' + list_name;
+							
 							$('#the_link').html(url).attr('href', url);
+							$('#share_loading').css({'display':'none'});
+							
+							var tokened_url = window.location.href + 'list/' + list_name + '?token=' + the_token ;
+
+							$('#the_token_link').html(tokened_url).attr('href', tokened_url);
+							$('#token_loading').css({'display':'none'});
 
 							$.each(all_items, function (index, item) {
-								save_item(list_name, item);
+								save_item(list_name, item, the_token);
 							});
 						},
 						
@@ -108,7 +133,7 @@ $(document).ready(function() {
 			}
 			else{
 				$.each(all_items, function (index, item) {
-					save_item(list_name, item);
+					save_item(list_name, item, url_token);
 				});
 			}
 		}
@@ -127,7 +152,7 @@ function blink(selector){
 	});
 }
 
-function save_item(list_name, item){
+function save_item(list_name, item, l_token){
 	var csrf =  $('#csrf').val();
 
 	$.ajax({
@@ -135,6 +160,7 @@ function save_item(list_name, item){
 		type: "POST",
 	    data: {
 	    	name:list_name,
+	    	token: l_token,
 	    	price: item.price,
 	    	title: item.title,
 	    	link: item.link,

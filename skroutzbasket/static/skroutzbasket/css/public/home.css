@@ -52,3 +52,16 @@ h5{margin: 0px;}
 	width: 100px;
 	text-align: center;
 }
+
+.share_loading{
+	display: block;
+	width: 60px;
+	margin: 0px auto;
+	display: none;
+}
+.token_loading{
+	display: block;
+	width: 60px;
+	margin: 0px auto;
+	display: none;
+}

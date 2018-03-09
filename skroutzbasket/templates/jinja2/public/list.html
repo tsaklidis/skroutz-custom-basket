@@ -72,8 +72,17 @@
 
 				<!-- Modal body -->
 				<div class="modal-body text-center">
-					Anyone with this link can view the curent list. <br>
-					<a id="the_link" href="{{ url('public:list_view', args=[items_list.name]) }}"></a>
+					
+					<div class='alert alert-info'>Link for viewing list only</div>
+					<img class="share_loading" src="{{ static('skroutzbasket/img/small_loading.gif') }}">
+					<a id="the_link" href=""></a>
+					<hr>
+					<div class="alert alert-danger">
+						Link for viewing AND editing. <br>
+						Attention anyone with this link can add items to list
+					</div>
+					<img class="token_loading" src="{{ static('skroutzbasket/img/small_loading.gif') }}">
+					<a id="the_token_link" href=""></a>
 				</div>
 
 				<!-- Modal footer -->
@@ -92,7 +101,8 @@
 	<script src="{{ static('skroutzbasket/js/public/home.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#the_link').html(window.location.href)
+			$('#the_link').html(window.location.href.replace(/&?token=([^&]$|[^&]*)/i, ""))
+			$('#the_token_link').html(window.location.href)
 		});
 	</script>
 {% endblock %}
