@@ -13,11 +13,13 @@ Use with your own risk.
 <ol>
 	<li>Better CSS for items</li>
 	<li>Calculate shipping</li>
-	<li>Anyone can edit a list. Allow edit with secret key-token only a link: /list/r4g5h6?key=secret_key can edit</li>
+	<li>
+		<strike>Anyone can edit a list. Allow edit with secret key-token only a link: /list/r4g5h6?key=secret_key can edit</strike>
+	</li>
 	<li>API endpoints with DRF for ajax comunications</li>
 	<li>Sanitize inputs</li>
-	<li>Fix the top menu</li>
-	<li>Create a footer</li>
+	<li><strike>Fix the top menu</strike></li>
+	<li><strike>Create a footer</strike></li>
 	<li>Optimize javascript</li>
-	<li>More user interact. Hide buttons, loading icons etc.</li>
+	<li><strike>More user interact. Hide buttons, loading icons etc.</strike></li>
 </ol>
