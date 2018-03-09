@@ -11,7 +11,7 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 
 
 $(document).ready(function() {
-	if ($_GET["token"] == "undefined" || $_GET["token"] == undefined)}{
+	if ($_GET["token"] == "undefined" || $_GET["token"] == undefined){
 		$_GET["token"] = '';
 	}
 
