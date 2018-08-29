@@ -8,6 +8,13 @@ In the total price the shipping is not included.
 <br>
 Use with your own risk.
 
+You can check the site here. BUT!<br>
+It is hosted on a free host provider so there are some limitation. <br>
+For example, python can't interact with skroutz directly so I use a proxy for the requests.<br>
+http://gruber.ga/ <br>
+or <br>
+https://steftsak.pythonanywhere.com
+
 ![](screenshots/1.png)
 ![](screenshots/2.png)
 
