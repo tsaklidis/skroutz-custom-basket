@@ -24,11 +24,6 @@ def get_items(site):
         req = urllib2.Request(site, headers=hdr)
 
         try:
-
-            proxy = urllib2.ProxyHandler({'http': '192.12.15.36:3128'})
-            opener = urllib2.build_opener(proxy)
-            urllib2.install_opener(opener)
-
             page = urllib2.urlopen(req).read()
             soup = BeautifulSoup.BeautifulSoup(page)
 
