@@ -25,7 +25,7 @@ def get_items(site):
 
         try:
 
-            proxy = urllib2.ProxyHandler({'http': '185.229.65.9:41258'})
+            proxy = urllib2.ProxyHandler({'http': '148.217.94.54:3128'})
             opener = urllib2.build_opener(proxy)
             urllib2.install_opener(opener)
 
