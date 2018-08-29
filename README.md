@@ -8,6 +8,8 @@ In the total price the shipping is not included.
 <br>
 Use with your own risk.
 
+![](screenshots/1.png)
+![](screenshots/2.png)
 
 <h4>TODO:</h4>
 <ol>
