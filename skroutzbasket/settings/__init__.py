@@ -1,8 +1,10 @@
-from .base import *
+# Uncoment if runing on normal host
 
-try:
-    from .local import *
-except ImportError, exc:
-    exc.args = tuple(['%s (Create your own local.py)' %
-                     exc.args[0]])
-    raise exc
+# from .base import *
+
+# try:
+#     from .local import *
+# except ImportError, exc:
+#     exc.args = tuple(['%s (Create your own local.py)' %
+#                      exc.args[0]])
+#     raise exc
